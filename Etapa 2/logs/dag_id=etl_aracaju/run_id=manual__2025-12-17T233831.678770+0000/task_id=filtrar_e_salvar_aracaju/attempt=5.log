@@ -1,0 +1,54 @@
+[2025-12-17T23:44:37.594+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-17T23:44:37.638+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_aracaju.filtrar_e_salvar_aracaju manual__2025-12-17T23:38:31.678770+00:00 [queued]>
+[2025-12-17T23:44:37.651+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_aracaju.filtrar_e_salvar_aracaju manual__2025-12-17T23:38:31.678770+00:00 [queued]>
+[2025-12-17T23:44:37.653+0000] {taskinstance.py:2306} INFO - Starting attempt 5 of 5
+[2025-12-17T23:44:37.671+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): filtrar_e_salvar_aracaju> on 2025-12-17 23:38:31.678770+00:00
+[2025-12-17T23:44:37.682+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'etl_aracaju', 'filtrar_e_salvar_aracaju', 'manual__2025-12-17T23:38:31.678770+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/etl_aracaju.py', '--cfg-path', '/tmp/tmpssud7vv5']
+[2025-12-17T23:44:37.685+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=426) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-12-17T23:44:37.685+0000] {standard_task_runner.py:91} INFO - Job 9: Subtask filtrar_e_salvar_aracaju
+[2025-12-17T23:44:37.686+0000] {standard_task_runner.py:64} INFO - Started process 428 to run task
+[2025-12-17T23:44:37.773+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_aracaju.filtrar_e_salvar_aracaju manual__2025-12-17T23:38:31.678770+00:00 [running]> on host b9710554d12d
+[2025-12-17T23:44:38.089+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_aracaju' AIRFLOW_CTX_TASK_ID='filtrar_e_salvar_aracaju' AIRFLOW_CTX_EXECUTION_DATE='2025-12-17T23:38:31.678770+00:00' AIRFLOW_CTX_TRY_NUMBER='5' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-17T23:38:31.678770+00:00'
+[2025-12-17T23:44:38.090+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-17T23:44:38.105+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-17T23:44:38.106+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/etl_aracaju.py", line 15, in ler_filtrar_e_salvar
+    df = pd.read_csv(CSV_PATH, sep=',', encoding='utf-8')  # se der erro, troque sep=';' e encoding='latin-1'
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 948, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 611, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 1448, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/parsers/readers.py", line 1705, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/common.py", line 872, in get_handle
+    handle = open(handle, ioargs.mode)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/airflow/data/NOME_DO_SEU_ARQUIVO.csv'
+[2025-12-17T23:44:38.132+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=etl_aracaju, task_id=filtrar_e_salvar_aracaju, run_id=manual__2025-12-17T23:38:31.678770+00:00, execution_date=20251217T233831, start_date=20251217T234437, end_date=20251217T234438
+[2025-12-17T23:44:38.149+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 9 for task filtrar_e_salvar_aracaju ([Errno 2] No such file or directory: '/opt/airflow/data/NOME_DO_SEU_ARQUIVO.csv'; 428)
+[2025-12-17T23:44:38.182+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2025-12-17T23:44:38.207+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-17T23:44:38.210+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

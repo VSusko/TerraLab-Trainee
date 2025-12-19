@@ -1,0 +1,3 @@
+docker compose run --rm airflow-webserver airflow db init
+docker compose run airflow-webserver airflow users create -u admin -p admin -f Admin -l User -r Admin -e admin@email.com
+docker compose up -d

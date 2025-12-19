@@ -1,0 +1,122 @@
+[2025-12-17T23:45:35.841+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-17T23:45:35.887+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_aracaju.filtrar_e_salvar_aracaju manual__2025-12-17T23:38:31.678770+00:00 [queued]>
+[2025-12-17T23:45:35.898+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_aracaju.filtrar_e_salvar_aracaju manual__2025-12-17T23:38:31.678770+00:00 [queued]>
+[2025-12-17T23:45:35.899+0000] {taskinstance.py:2306} INFO - Starting attempt 6 of 6
+[2025-12-17T23:45:35.915+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): filtrar_e_salvar_aracaju> on 2025-12-17 23:38:31.678770+00:00
+[2025-12-17T23:45:35.928+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'etl_aracaju', 'filtrar_e_salvar_aracaju', 'manual__2025-12-17T23:38:31.678770+00:00', '--job-id', '10', '--raw', '--subdir', 'DAGS_FOLDER/etl_aracaju.py', '--cfg-path', '/tmp/tmp81kvzsu2']
+[2025-12-17T23:45:35.933+0000] {standard_task_runner.py:91} INFO - Job 10: Subtask filtrar_e_salvar_aracaju
+[2025-12-17T23:45:35.937+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=441) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-12-17T23:45:35.939+0000] {standard_task_runner.py:64} INFO - Started process 443 to run task
+[2025-12-17T23:45:36.038+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_aracaju.filtrar_e_salvar_aracaju manual__2025-12-17T23:38:31.678770+00:00 [running]> on host b9710554d12d
+[2025-12-17T23:45:36.364+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_aracaju' AIRFLOW_CTX_TASK_ID='filtrar_e_salvar_aracaju' AIRFLOW_CTX_EXECUTION_DATE='2025-12-17T23:38:31.678770+00:00' AIRFLOW_CTX_TRY_NUMBER='6' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-17T23:38:31.678770+00:00'
+[2025-12-17T23:45:36.366+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-17T23:45:36.649+0000] {logging_mixin.py:188} INFO - Colunas do CSV: ['Unnamed: 0', 'city', 'state', 'latitude', 'longitude', 'accuracy', 'geoapi_id', 'date']
+[2025-12-17T23:45:36.675+0000] {logging_mixin.py:188} INFO - Encontrados 12 registros de Aracaju
+[2025-12-17T23:45:36.695+0000] {base.py:84} INFO - Using connection ID '***_db' for task execution.
+[2025-12-17T23:45:36.706+0000] {sql.py:495} INFO - Running statement: 
+    CREATE TABLE IF NOT EXISTS enderecos_aracaju (
+        id SERIAL PRIMARY KEY,
+        city VARCHAR,
+        state VARCHAR,
+        latitude FLOAT,
+        longitude FLOAT,
+        accuracy FLOAT,
+        geoapi_id VARCHAR,
+        date DATE
+    );
+    , parameters: None
+[2025-12-17T23:45:36.732+0000] {base.py:84} INFO - Using connection ID '***_db' for task execution.
+[2025-12-17T23:45:36.745+0000] {sql.py:495} INFO - Running statement: TRUNCATE TABLE enderecos_aracaju RESTART IDENTITY;, parameters: None
+[2025-12-17T23:45:36.784+0000] {base.py:84} INFO - Using connection ID '***_db' for task execution.
+[2025-12-17T23:45:36.810+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-17T23:45:36.812+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column "city" of relation "enderecos_aracaju" does not exist
+LINE 1: INSERT INTO enderecos_aracaju (city, state, latitude, longit...
+                                       ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/etl_aracaju.py", line 54, in ler_filtrar_e_salvar
+    df_aracaju.to_sql(
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/generic.py", line 3008, in to_sql
+    return sql.to_sql(
+           ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 788, in to_sql
+    return pandas_sql.to_sql(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1958, in to_sql
+    total_inserted = sql_engine.insert_records(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1507, in insert_records
+    raise err
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1498, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1059, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 967, in _execute_insert_multi
+    result = conn.execute(stmt)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column "city" of relation "enderecos_aracaju" does not exist
+LINE 1: INSERT INTO enderecos_aracaju (city, state, latitude, longit...
+                                       ^
+
+[SQL: INSERT INTO enderecos_aracaju (city, state, latitude, longitude, accuracy, geoapi_id, date) VALUES (%(city_m0)s, %(state_m0)s, %(latitude_m0)s, %(longitude_m0)s, %(accuracy_m0)s, %(geoapi_id_m0)s, %(date_m0)s), (%(city_m1)s, %(state_m1)s, %(latitude_m1)s, %(longitude_m1)s, %(accuracy_m1)s, %(geoapi_id_m1)s, %(date_m1)s), (%(city_m2)s, %(state_m2)s, %(latitude_m2)s, %(longitude_m2)s, %(accuracy_m2)s, %(geoapi_id_m2)s, %(date_m2)s), (%(city_m3)s, %(state_m3)s, %(latitude_m3)s, %(longitude_m3)s, %(accuracy_m3)s, %(geoapi_id_m3)s, %(date_m3)s), (%(city_m4)s, %(state_m4)s, %(latitude_m4)s, %(longitude_m4)s, %(accuracy_m4)s, %(geoapi_id_m4)s, %(date_m4)s), (%(city_m5)s, %(state_m5)s, %(latitude_m5)s, %(longitude_m5)s, %(accuracy_m5)s, %(geoapi_id_m5)s, %(date_m5)s), (%(city_m6)s, %(state_m6)s, %(latitude_m6)s, %(longitude_m6)s, %(accuracy_m6)s, %(geoapi_id_m6)s, %(date_m6)s), (%(city_m7)s, %(state_m7)s, %(latitude_m7)s, %(longitude_m7)s, %(accuracy_m7)s, %(geoapi_id_m7)s, %(date_m7)s), (%(city_m8)s, %(state_m8)s, %(latitude_m8)s, %(longitude_m8)s, %(accuracy_m8)s, %(geoapi_id_m8)s, %(date_m8)s), (%(city_m9)s, %(state_m9)s, %(latitude_m9)s, %(longitude_m9)s, %(accuracy_m9)s, %(geoapi_id_m9)s, %(date_m9)s), (%(city_m10)s, %(state_m10)s, %(latitude_m10)s, %(longitude_m10)s, %(accuracy_m10)s, %(geoapi_id_m10)s, %(date_m10)s), (%(city_m11)s, %(state_m11)s, %(latitude_m11)s, %(longitude_m11)s, %(accuracy_m11)s, %(geoapi_id_m11)s, %(date_m11)s)]
+[parameters: {'city_m0': 'ARACAJU', 'state_m0': 'SE', 'latitude_m0': -10.92175, 'longitude_m0': -37.0503, 'accuracy_m0': 9.9009103775, 'geoapi_id_m0': 'TomTom', 'date_m0': '2023-02-25', 'city_m1': 'ARACAJU', 'state_m1': 'SE', 'latitude_m1': -10.87218, 'longitude_m1': -37.07633, 'accuracy_m1': 9.9009103775, 'geoapi_id_m1': 'TomTom', 'date_m1': '2023-02-25', 'city_m2': 'ARACAJU', 'state_m2': 'SE', 'latitude_m2': -10.98105, 'longitude_m2': -37.06342, 'accuracy_m2': 12.2284860611, 'geoapi_id_m2': 'TomTom', 'date_m2': '2023-02-25', 'city_m3': 'ARACAJU', 'state_m3': 'SE', 'latitude_m3': -10.96451, 'longitude_m3': -37.05425, 'accuracy_m3': 12.0849208832, 'geoapi_id_m3': 'TomTom', 'date_m3': '2023-02-25', 'city_m4': 'ARACAJU', 'state_m4': 'SE', 'latitude_m4': -10.89006, 'longitude_m4': -37.06419, 'accuracy_m4': 0.88, 'geoapi_id_m4': 'Here', 'date_m4': '2023-02-25', 'city_m5': 'ARACAJU', 'state_m5': 'SE', 'latitude_m5': -10.9282805, 'longitude_m5': -37.0544832, 'accuracy_m5': 0.660635, 'geoapi_id_m5': 'MapBox', 'date_m5': '2023-02-26', 'city_m6': 'ARACAJU', 'state_m6': 'SE', 'latitude_m6': -10.979373, 'longitude_m6': -37.103117, 'accuracy_m6': 0.777037, 'geoapi_id_m6': 'MapBox', 'date_m6': '2023-02-26', 'city_m7': 'ARACAJU', 'state_m7': 'SE', 'latitude_m7': -10.989406, 'longitude_m7': -37.081503, 'accuracy_m7': 0.6, 'geoapi_id_m7': 'OpenRouteService', 'date_m7': '2023-02-26', 'city_m8': 'ARACAJU', 'state_m8': 'SE', 'latitude_m8': -10.989406, 'longitude_m8': -37.081503, 'accuracy_m8': 0.6, 'geoapi_id_m8': 'OpenRouteService', 'date_m8': '2023-02-26', 'city_m9': 'ARACAJU', 'state_m9': 'SE', 'latitude_m9': -10.9055406, 'longitude_m9': -37.0775331, 'accuracy_m9': 0.724127, 'geoapi_id_m9': 'MapBox', 'date_m9': '2023-02-26', 'city_m10': 'ARACAJU', 'state_m10': 'SE', 'latitude_m10': -10.925342, 'longitude_m10': -37.051668, 'accuracy_m10': 0.8, 'geoapi_id_m10': 'OpenRouteService', 'date_m10': '2023-03-05', 'city_m11': 'ARACAJU', 'state_m11': 'SE', 'latitude_m11': -10.94683, 'longitude_m11': -37.06473, 'accuracy_m11': 10.9116249084, 'geoapi_id_m11': 'TomTom', 'date_m11': '2023-03-05'}]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2025-12-17T23:45:36.871+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=etl_aracaju, task_id=filtrar_e_salvar_aracaju, run_id=manual__2025-12-17T23:38:31.678770+00:00, execution_date=20251217T233831, start_date=20251217T234535, end_date=20251217T234536
+[2025-12-17T23:45:36.888+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 10 for task filtrar_e_salvar_aracaju ((psycopg2.errors.UndefinedColumn) column "city" of relation "enderecos_aracaju" does not exist
+LINE 1: INSERT INTO enderecos_aracaju (city, state, latitude, longit...
+                                       ^
+
+[SQL: INSERT INTO enderecos_aracaju (city, state, latitude, longitude, accuracy, geoapi_id, date) VALUES (%(city_m0)s, %(state_m0)s, %(latitude_m0)s, %(longitude_m0)s, %(accuracy_m0)s, %(geoapi_id_m0)s, %(date_m0)s), (%(city_m1)s, %(state_m1)s, %(latitude_m1)s, %(longitude_m1)s, %(accuracy_m1)s, %(geoapi_id_m1)s, %(date_m1)s), (%(city_m2)s, %(state_m2)s, %(latitude_m2)s, %(longitude_m2)s, %(accuracy_m2)s, %(geoapi_id_m2)s, %(date_m2)s), (%(city_m3)s, %(state_m3)s, %(latitude_m3)s, %(longitude_m3)s, %(accuracy_m3)s, %(geoapi_id_m3)s, %(date_m3)s), (%(city_m4)s, %(state_m4)s, %(latitude_m4)s, %(longitude_m4)s, %(accuracy_m4)s, %(geoapi_id_m4)s, %(date_m4)s), (%(city_m5)s, %(state_m5)s, %(latitude_m5)s, %(longitude_m5)s, %(accuracy_m5)s, %(geoapi_id_m5)s, %(date_m5)s), (%(city_m6)s, %(state_m6)s, %(latitude_m6)s, %(longitude_m6)s, %(accuracy_m6)s, %(geoapi_id_m6)s, %(date_m6)s), (%(city_m7)s, %(state_m7)s, %(latitude_m7)s, %(longitude_m7)s, %(accuracy_m7)s, %(geoapi_id_m7)s, %(date_m7)s), (%(city_m8)s, %(state_m8)s, %(latitude_m8)s, %(longitude_m8)s, %(accuracy_m8)s, %(geoapi_id_m8)s, %(date_m8)s), (%(city_m9)s, %(state_m9)s, %(latitude_m9)s, %(longitude_m9)s, %(accuracy_m9)s, %(geoapi_id_m9)s, %(date_m9)s), (%(city_m10)s, %(state_m10)s, %(latitude_m10)s, %(longitude_m10)s, %(accuracy_m10)s, %(geoapi_id_m10)s, %(date_m10)s), (%(city_m11)s, %(state_m11)s, %(latitude_m11)s, %(longitude_m11)s, %(accuracy_m11)s, %(geoapi_id_m11)s, %(date_m11)s)]
+[parameters: {'city_m0': 'ARACAJU', 'state_m0': 'SE', 'latitude_m0': -10.92175, 'longitude_m0': -37.0503, 'accuracy_m0': 9.9009103775, 'geoapi_id_m0': 'TomTom', 'date_m0': '2023-02-25', 'city_m1': 'ARACAJU', 'state_m1': 'SE', 'latitude_m1': -10.87218, 'longitude_m1': -37.07633, 'accuracy_m1': 9.9009103775, 'geoapi_id_m1': 'TomTom', 'date_m1': '2023-02-25', 'city_m2': 'ARACAJU', 'state_m2': 'SE', 'latitude_m2': -10.98105, 'longitude_m2': -37.06342, 'accuracy_m2': 12.2284860611, 'geoapi_id_m2': 'TomTom', 'date_m2': '2023-02-25', 'city_m3': 'ARACAJU', 'state_m3': 'SE', 'latitude_m3': -10.96451, 'longitude_m3': -37.05425, 'accuracy_m3': 12.0849208832, 'geoapi_id_m3': 'TomTom', 'date_m3': '2023-02-25', 'city_m4': 'ARACAJU', 'state_m4': 'SE', 'latitude_m4': -10.89006, 'longitude_m4': -37.06419, 'accuracy_m4': 0.88, 'geoapi_id_m4': 'Here', 'date_m4': '2023-02-25', 'city_m5': 'ARACAJU', 'state_m5': 'SE', 'latitude_m5': -10.9282805, 'longitude_m5': -37.0544832, 'accuracy_m5': 0.660635, 'geoapi_id_m5': 'MapBox', 'date_m5': '2023-02-26', 'city_m6': 'ARACAJU', 'state_m6': 'SE', 'latitude_m6': -10.979373, 'longitude_m6': -37.103117, 'accuracy_m6': 0.777037, 'geoapi_id_m6': 'MapBox', 'date_m6': '2023-02-26', 'city_m7': 'ARACAJU', 'state_m7': 'SE', 'latitude_m7': -10.989406, 'longitude_m7': -37.081503, 'accuracy_m7': 0.6, 'geoapi_id_m7': 'OpenRouteService', 'date_m7': '2023-02-26', 'city_m8': 'ARACAJU', 'state_m8': 'SE', 'latitude_m8': -10.989406, 'longitude_m8': -37.081503, 'accuracy_m8': 0.6, 'geoapi_id_m8': 'OpenRouteService', 'date_m8': '2023-02-26', 'city_m9': 'ARACAJU', 'state_m9': 'SE', 'latitude_m9': -10.9055406, 'longitude_m9': -37.0775331, 'accuracy_m9': 0.724127, 'geoapi_id_m9': 'MapBox', 'date_m9': '2023-02-26', 'city_m10': 'ARACAJU', 'state_m10': 'SE', 'latitude_m10': -10.925342, 'longitude_m10': -37.051668, 'accuracy_m10': 0.8, 'geoapi_id_m10': 'OpenRouteService', 'date_m10': '2023-03-05', 'city_m11': 'ARACAJU', 'state_m11': 'SE', 'latitude_m11': -10.94683, 'longitude_m11': -37.06473, 'accuracy_m11': 10.9116249084, 'geoapi_id_m11': 'TomTom', 'date_m11': '2023-03-05'}]
+(Background on this error at: https://sqlalche.me/e/14/f405); 443)
+[2025-12-17T23:45:36.918+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2025-12-17T23:45:36.947+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-17T23:45:36.952+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

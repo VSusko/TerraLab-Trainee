@@ -1,0 +1,52 @@
+[2025-12-17T22:01:47.721+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-17T22:01:47.748+0000] {taskinstance.py:2066} INFO - Dependencies not met for <TaskInstance: importa_enderecos_aracaju.baixar_csv manual__2025-12-17T22:03:56.845727+00:00 [queued]>, dependency 'Execution Date' FAILED: Execution date 2025-12-17T22:03:56.845727+00:00 is in the future (the current date is 2025-12-17T22:01:47.748726+00:00).
+[2025-12-17T22:01:47.758+0000] {local_task_job_runner.py:163} INFO - Task is not able to be run
+[2025-12-17T22:04:14.635+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-17T22:04:14.668+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: importa_enderecos_aracaju.baixar_csv manual__2025-12-17T22:03:56.845727+00:00 [queued]>
+[2025-12-17T22:04:14.678+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: importa_enderecos_aracaju.baixar_csv manual__2025-12-17T22:03:56.845727+00:00 [queued]>
+[2025-12-17T22:04:14.679+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-12-17T22:04:14.695+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): baixar_csv> on 2025-12-17 22:03:56.845727+00:00
+[2025-12-17T22:04:14.707+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=1061) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-12-17T22:04:14.705+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'importa_enderecos_aracaju', 'baixar_csv', 'manual__2025-12-17T22:03:56.845727+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/importa_aracaju.py', '--cfg-path', '/tmp/tmpu6uknwe0']
+[2025-12-17T22:04:14.709+0000] {standard_task_runner.py:63} INFO - Started process 1063 to run task
+[2025-12-17T22:04:14.709+0000] {standard_task_runner.py:91} INFO - Job 15: Subtask baixar_csv
+[2025-12-17T22:04:14.786+0000] {task_command.py:426} INFO - Running <TaskInstance: importa_enderecos_aracaju.baixar_csv manual__2025-12-17T22:03:56.845727+00:00 [running]> on host a11d9e26add2
+[2025-12-17T22:04:14.898+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='importa_enderecos_aracaju' AIRFLOW_CTX_TASK_ID='baixar_csv' AIRFLOW_CTX_EXECUTION_DATE='2025-12-17T22:03:56.845727+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-17T22:03:56.845727+00:00'
+[2025-12-17T22:04:14.900+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-17T22:04:16.893+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-17T22:04:16.894+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/importa_aracaju.py", line 23, in baixar_csv
+    df.columns = [
+    ^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/generic.py", line 6218, in __setattr__
+    return object.__setattr__(self, name, value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "properties.pyx", line 69, in pandas._libs.properties.AxisProperty.__set__
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/generic.py", line 767, in _set_axis
+    self._mgr.set_axis(axis, labels)
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 227, in set_axis
+    self._validate_set_axis(axis, new_labels)
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/internals/base.py", line 85, in _validate_set_axis
+    raise ValueError(
+ValueError: Length mismatch: Expected axis has 127 elements, new values have 8 elements
+[2025-12-17T22:04:16.926+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=importa_enderecos_aracaju, task_id=baixar_csv, run_id=manual__2025-12-17T22:03:56.845727+00:00, execution_date=20251217T220356, start_date=20251217T220414, end_date=20251217T220416
+[2025-12-17T22:04:16.943+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 15 for task baixar_csv (Length mismatch: Expected axis has 127 elements, new values have 8 elements; 1063)
+[2025-12-17T22:04:16.969+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-12-17T22:04:17.000+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-17T22:04:17.006+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

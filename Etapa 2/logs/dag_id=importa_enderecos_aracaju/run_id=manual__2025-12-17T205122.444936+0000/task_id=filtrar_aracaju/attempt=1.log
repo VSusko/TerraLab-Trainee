@@ -1,0 +1,56 @@
+[2025-12-17T20:56:00.900+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-17T20:56:00.932+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: importa_enderecos_aracaju.filtrar_aracaju manual__2025-12-17T20:51:22.444936+00:00 [queued]>
+[2025-12-17T20:56:00.941+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: importa_enderecos_aracaju.filtrar_aracaju manual__2025-12-17T20:51:22.444936+00:00 [queued]>
+[2025-12-17T20:56:00.942+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-12-17T20:56:00.957+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): filtrar_aracaju> on 2025-12-17 20:51:22.444936+00:00
+[2025-12-17T20:56:00.967+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'importa_enderecos_aracaju', 'filtrar_aracaju', 'manual__2025-12-17T20:51:22.444936+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/importa_aracaju.py', '--cfg-path', '/tmp/tmprcv22_12']
+[2025-12-17T20:56:00.970+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=243) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-12-17T20:56:00.970+0000] {standard_task_runner.py:91} INFO - Job 4: Subtask filtrar_aracaju
+[2025-12-17T20:56:00.971+0000] {standard_task_runner.py:63} INFO - Started process 245 to run task
+[2025-12-17T20:56:01.032+0000] {task_command.py:426} INFO - Running <TaskInstance: importa_enderecos_aracaju.filtrar_aracaju manual__2025-12-17T20:51:22.444936+00:00 [running]> on host a11d9e26add2
+[2025-12-17T20:56:01.114+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='importa_enderecos_aracaju' AIRFLOW_CTX_TASK_ID='filtrar_aracaju' AIRFLOW_CTX_EXECUTION_DATE='2025-12-17T20:51:22.444936+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-17T20:51:22.444936+00:00'
+[2025-12-17T20:56:01.115+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-17T20:56:01.143+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-17T20:56:01.144+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3791, in get_loc
+    return self._engine.get_loc(casted_key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "index.pyx", line 152, in pandas._libs.index.IndexEngine.get_loc
+  File "index.pyx", line 181, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'cidade'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/importa_aracaju.py", line 27, in filtrar_aracaju
+    df_aracaju = df[df["cidade"].str.upper() == "ARACAJU"]
+                    ~~^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/frame.py", line 3893, in __getitem__
+    indexer = self.columns.get_loc(key)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/indexes/base.py", line 3798, in get_loc
+    raise KeyError(key) from err
+KeyError: 'cidade'
+[2025-12-17T20:56:01.162+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=importa_enderecos_aracaju, task_id=filtrar_aracaju, run_id=manual__2025-12-17T20:51:22.444936+00:00, execution_date=20251217T205122, start_date=20251217T205600, end_date=20251217T205601
+[2025-12-17T20:56:01.325+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 4 for task filtrar_aracaju ('cidade'; 245)
+[2025-12-17T20:56:01.346+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-12-17T20:56:01.367+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-17T20:56:01.373+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

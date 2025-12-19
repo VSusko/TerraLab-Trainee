@@ -1,0 +1,126 @@
+[2025-12-17T23:38:58.487+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-17T23:38:58.530+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_aracaju.filtrar_e_salvar_aracaju manual__2025-12-17T23:38:31.678770+00:00 [queued]>
+[2025-12-17T23:38:58.540+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_aracaju.filtrar_e_salvar_aracaju manual__2025-12-17T23:38:31.678770+00:00 [queued]>
+[2025-12-17T23:38:58.541+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2025-12-17T23:38:58.556+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): filtrar_e_salvar_aracaju> on 2025-12-17 23:38:31.678770+00:00
+[2025-12-17T23:38:58.568+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'etl_aracaju', 'filtrar_e_salvar_aracaju', 'manual__2025-12-17T23:38:31.678770+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/etl_aracaju.py', '--cfg-path', '/tmp/tmpvy10dvbd']
+[2025-12-17T23:38:58.571+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=375) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-12-17T23:38:58.572+0000] {standard_task_runner.py:91} INFO - Job 6: Subtask filtrar_e_salvar_aracaju
+[2025-12-17T23:38:58.572+0000] {standard_task_runner.py:64} INFO - Started process 377 to run task
+[2025-12-17T23:41:12.040+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_aracaju.filtrar_e_salvar_aracaju manual__2025-12-17T23:38:31.678770+00:00 [running]> on host b9710554d12d
+[2025-12-17T23:41:12.443+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_aracaju' AIRFLOW_CTX_TASK_ID='filtrar_e_salvar_aracaju' AIRFLOW_CTX_EXECUTION_DATE='2025-12-17T23:38:31.678770+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-17T23:38:31.678770+00:00'
+[2025-12-17T23:41:12.445+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-17T23:41:12.697+0000] {logging_mixin.py:188} INFO - Encontrados 12 registros de Aracaju
+[2025-12-17T23:41:12.713+0000] {base.py:84} INFO - Using connection ID '***_db' for task execution.
+[2025-12-17T23:41:12.724+0000] {sql.py:495} INFO - Running statement: 
+    CREATE TABLE IF NOT EXISTS enderecos_aracaju (
+        id SERIAL PRIMARY KEY,
+        logradouro VARCHAR,
+        numero VARCHAR,
+        bairro VARCHAR,
+        cidade VARCHAR,
+        cep VARCHAR
+        -- Adicione mais colunas conforme necessário
+    );
+    , parameters: None
+[2025-12-17T23:41:12.738+0000] {base.py:84} INFO - Using connection ID '***_db' for task execution.
+[2025-12-17T23:41:12.749+0000] {sql.py:495} INFO - Running statement: TRUNCATE TABLE enderecos_aracaju;, parameters: None
+[2025-12-17T23:41:12.782+0000] {base.py:84} INFO - Using connection ID '***_db' for task execution.
+[2025-12-17T23:41:12.810+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-17T23:41:12.811+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+                                     ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.UndefinedColumn: column "Unnamed: 0" of relation "enderecos_aracaju" does not exist
+LINE 1: INSERT INTO enderecos_aracaju ("Unnamed: 0", city, state, la...
+                                       ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/etl_aracaju.py", line 46, in ler_filtrar_e_salvar
+    df_aracaju.to_sql(
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/generic.py", line 3008, in to_sql
+    return sql.to_sql(
+           ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 788, in to_sql
+    return pandas_sql.to_sql(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1958, in to_sql
+    total_inserted = sql_engine.insert_records(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1507, in insert_records
+    raise err
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1498, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1059, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 951, in _execute_insert
+    result = conn.execute(self.table.insert(), data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 334, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1577, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1890, in _execute_context
+    self.dialect.do_executemany(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/psycopg2.py", line 982, in do_executemany
+    context._psycopg2_fetched_rows = xtras.execute_values(
+                                     ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column "Unnamed: 0" of relation "enderecos_aracaju" does not exist
+LINE 1: INSERT INTO enderecos_aracaju ("Unnamed: 0", city, state, la...
+                                       ^
+
+[SQL: INSERT INTO enderecos_aracaju ("Unnamed: 0", city, state, latitude, longitude, accuracy, geoapi_id, date) VALUES (%(UnnamedC_0)s, %(city)s, %(state)s, %(latitude)s, %(longitude)s, %(accuracy)s, %(geoapi_id)s, %(date)s)]
+[parameters: ({'UnnamedC_0': 34809, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.92175, 'longitude': -37.0503, 'accuracy': 9.9009103775, 'geoapi_id': 'TomTom', 'date': '2023-02-25'}, {'UnnamedC_0': 34816, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.87218, 'longitude': -37.07633, 'accuracy': 9.9009103775, 'geoapi_id': 'TomTom', 'date': '2023-02-25'}, {'UnnamedC_0': 34826, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.98105, 'longitude': -37.06342, 'accuracy': 12.2284860611, 'geoapi_id': 'TomTom', 'date': '2023-02-25'}, {'UnnamedC_0': 34856, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.96451, 'longitude': -37.05425, 'accuracy': 12.0849208832, 'geoapi_id': 'TomTom', 'date': '2023-02-25'}, {'UnnamedC_0': 34859, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.89006, 'longitude': -37.06419, 'accuracy': 0.88, 'geoapi_id': 'Here', 'date': '2023-02-25'}, {'UnnamedC_0': 34971, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.9282805, 'longitude': -37.0544832, 'accuracy': 0.660635, 'geoapi_id': 'MapBox', 'date': '2023-02-26'}, {'UnnamedC_0': 34979, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.979373, 'longitude': -37.103117, 'accuracy': 0.777037, 'geoapi_id': 'MapBox', 'date': '2023-02-26'}, {'UnnamedC_0': 34994, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.989406, 'longitude': -37.081503, 'accuracy': 0.6, 'geoapi_id': 'OpenRouteService', 'date': '2023-02-26'}  ... displaying 10 of 12 total bound parameter sets ...  {'UnnamedC_0': 40106, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.925342, 'longitude': -37.051668, 'accuracy': 0.8, 'geoapi_id': 'OpenRouteService', 'date': '2023-03-05'}, {'UnnamedC_0': 40160, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.94683, 'longitude': -37.06473, 'accuracy': 10.9116249084, 'geoapi_id': 'TomTom', 'date': '2023-03-05'})]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2025-12-17T23:41:12.838+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=etl_aracaju, task_id=filtrar_e_salvar_aracaju, run_id=manual__2025-12-17T23:38:31.678770+00:00, execution_date=20251217T233831, start_date=20251217T233858, end_date=20251217T234112
+[2025-12-17T23:41:12.856+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 6 for task filtrar_e_salvar_aracaju ((psycopg2.errors.UndefinedColumn) column "Unnamed: 0" of relation "enderecos_aracaju" does not exist
+LINE 1: INSERT INTO enderecos_aracaju ("Unnamed: 0", city, state, la...
+                                       ^
+
+[SQL: INSERT INTO enderecos_aracaju ("Unnamed: 0", city, state, latitude, longitude, accuracy, geoapi_id, date) VALUES (%(UnnamedC_0)s, %(city)s, %(state)s, %(latitude)s, %(longitude)s, %(accuracy)s, %(geoapi_id)s, %(date)s)]
+[parameters: ({'UnnamedC_0': 34809, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.92175, 'longitude': -37.0503, 'accuracy': 9.9009103775, 'geoapi_id': 'TomTom', 'date': '2023-02-25'}, {'UnnamedC_0': 34816, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.87218, 'longitude': -37.07633, 'accuracy': 9.9009103775, 'geoapi_id': 'TomTom', 'date': '2023-02-25'}, {'UnnamedC_0': 34826, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.98105, 'longitude': -37.06342, 'accuracy': 12.2284860611, 'geoapi_id': 'TomTom', 'date': '2023-02-25'}, {'UnnamedC_0': 34856, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.96451, 'longitude': -37.05425, 'accuracy': 12.0849208832, 'geoapi_id': 'TomTom', 'date': '2023-02-25'}, {'UnnamedC_0': 34859, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.89006, 'longitude': -37.06419, 'accuracy': 0.88, 'geoapi_id': 'Here', 'date': '2023-02-25'}, {'UnnamedC_0': 34971, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.9282805, 'longitude': -37.0544832, 'accuracy': 0.660635, 'geoapi_id': 'MapBox', 'date': '2023-02-26'}, {'UnnamedC_0': 34979, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.979373, 'longitude': -37.103117, 'accuracy': 0.777037, 'geoapi_id': 'MapBox', 'date': '2023-02-26'}, {'UnnamedC_0': 34994, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.989406, 'longitude': -37.081503, 'accuracy': 0.6, 'geoapi_id': 'OpenRouteService', 'date': '2023-02-26'}  ... displaying 10 of 12 total bound parameter sets ...  {'UnnamedC_0': 40106, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.925342, 'longitude': -37.051668, 'accuracy': 0.8, 'geoapi_id': 'OpenRouteService', 'date': '2023-03-05'}, {'UnnamedC_0': 40160, 'city': 'ARACAJU', 'state': 'SE', 'latitude': -10.94683, 'longitude': -37.06473, 'accuracy': 10.9116249084, 'geoapi_id': 'TomTom', 'date': '2023-03-05'})]
+(Background on this error at: https://sqlalche.me/e/14/f405); 377)
+[2025-12-17T23:41:12.917+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2025-12-17T23:41:12.941+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-17T23:41:12.946+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

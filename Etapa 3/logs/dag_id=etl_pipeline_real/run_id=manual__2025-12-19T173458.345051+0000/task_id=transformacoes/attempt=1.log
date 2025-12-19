@@ -1,0 +1,70 @@
+[2025-12-19T17:35:01.606+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-19T17:35:01.643+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_pipeline_real.transformacoes manual__2025-12-19T17:34:58.345051+00:00 [queued]>
+[2025-12-19T17:35:01.652+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_pipeline_real.transformacoes manual__2025-12-19T17:34:58.345051+00:00 [queued]>
+[2025-12-19T17:35:01.653+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-12-19T17:35:01.668+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transformacoes> on 2025-12-19 17:34:58.345051+00:00
+[2025-12-19T17:35:01.689+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'etl_pipeline_real', 'transformacoes', 'manual__2025-12-19T17:34:58.345051+00:00', '--job-id', '12', '--raw', '--subdir', 'DAGS_FOLDER/etl_pipeline.py', '--cfg-path', '/tmp/tmp3bmrypg0']
+[2025-12-19T17:35:01.696+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=934) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-12-19T17:35:01.698+0000] {standard_task_runner.py:91} INFO - Job 12: Subtask transformacoes
+[2025-12-19T17:35:01.698+0000] {standard_task_runner.py:64} INFO - Started process 936 to run task
+[2025-12-19T17:35:01.788+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_pipeline_real.transformacoes manual__2025-12-19T17:34:58.345051+00:00 [running]> on host ccad5058f773
+[2025-12-19T17:35:02.136+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_pipeline_real' AIRFLOW_CTX_TASK_ID='transformacoes' AIRFLOW_CTX_EXECUTION_DATE='2025-12-19T17:34:58.345051+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-19T17:34:58.345051+00:00'
+[2025-12-19T17:35:02.138+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-19T17:35:02.287+0000] {logging_mixin.py:188} INFO - Após remover OpenRouteService: 40002
+[2025-12-19T17:35:02.582+0000] {logging_mixin.py:188} INFO - Após validação espacial: 48
+[2025-12-19T17:35:02.584+0000] {python.py:237} INFO - Done. Returned value was:                         city state   latitude  ...   accuracy  geoapi_id        date
+0               PORTO ALEGRE    RS  -9.881167  ...   0.398990     MapBox  2022-03-09
+1                   CURITIBA    PR -10.914848  ...   0.451852     MapBox  2022-08-01
+2   NOSSA SENHORA DO SOCORRO    SE -10.855620  ...   0.920000       Here  2023-02-25
+3              SÃO CRISTÓVÃO    SE -11.009090  ...  10.602734     TomTom  2023-02-25
+4                 FEIRA NOVA    SE -10.262020  ...  11.232000     TomTom  2023-02-25
+5               MOITA BONITA    SE -10.581160  ...  18.317863     TomTom  2023-02-25
+6        BARRA DOS COQUEIROS    SE -10.901590  ...  16.066195     TomTom  2023-02-25
+7                    ARACAJU    SE -10.921750  ...   9.900910     TomTom  2023-02-25
+8                    LAGARTO    SE -10.918140  ...  11.944942     TomTom  2023-02-25
+9                  MACAMBIRA    SE -10.665370  ...  16.139021     TomTom  2023-02-25
+10                   ARACAJU    SE -10.872180  ...   9.900910     TomTom  2023-02-25
+11              BREJO GRANDE    SE -10.424210  ...  15.761542     TomTom  2023-02-25
+12                  ESTÂNCIA    SE -11.271430  ...   0.880000       Here  2023-02-25
+13                   ARACAJU    SE -10.981050  ...  12.228486     TomTom  2023-02-25
+14                   ARACAJU    SE -10.964510  ...  12.084921     TomTom  2023-02-25
+15                 INDIAROBA    SE -10.543340  ...   7.216715     TomTom  2023-02-25
+16                   ARACAJU    SE -10.890060  ...   0.880000       Here  2023-02-25
+17             SÃO CRISTÓVÃO    SE -10.931680  ...  11.232000     TomTom  2023-02-25
+18              AREIA BRANCA    SE -10.125630  ...  10.101743     TomTom  2023-02-25
+19         RIACHÃO DO DANTAS    SE -11.068940  ...  12.343410     TomTom  2023-02-25
+20                 ARAPIRACA    AL  -9.745420  ...  13.882561     TomTom  2023-02-25
+21        LIMOEIRO DE ANADIA    AL  -9.739080  ...  14.563538     TomTom  2023-02-25
+22                    PENEDO    AL -10.281420  ...   0.820000       Here  2023-02-25
+23                  OLIVENÇA    AL  -9.518650  ...   0.340000       Here  2023-02-25
+24                   ARACAJU    SE -10.928280  ...   0.660635     MapBox  2023-02-26
+25             SÃO CRISTÓVÃO    SE -11.010427  ...   0.653580     MapBox  2023-02-26
+26                JAPARATUBA    SE -10.220951  ...   0.456667     MapBox  2023-02-26
+27                 ITABAIANA    SE -10.696014  ...   0.777037     MapBox  2023-02-26
+28                   ARACAJU    SE -10.979373  ...   0.777037     MapBox  2023-02-26
+29                  ESTÂNCIA    SE -11.239955  ...   0.724127     MapBox  2023-02-26
+30            CAMPO DO BRITO    SE -10.749970  ...   0.752346     MapBox  2023-02-26
+31         RIACHÃO DO DANTAS    SE -11.071494  ...   0.801728     MapBox  2023-02-26
+32    SANTO AMARO DAS BROTAS    SE -10.788335  ...   0.762222     MapBox  2023-02-26
+33                SIMÃO DIAS    SE -10.810365  ...   0.795556     MapBox  2023-02-26
+34                   ARACAJU    SE -10.905541  ...   0.724127     MapBox  2023-02-26
+35           ILHA DAS FLORES    SE -10.433579  ...   0.801728     MapBox  2023-02-26
+36              ITABAIANINHA    SE -11.280440  ...   9.373616     TomTom  2023-02-18
+37                  OLIVENÇA    AL  -9.508289  ...   0.787619     MapBox  2023-02-18
+38                   LAGARTO    SE -10.910630  ...   9.786228     TomTom  2023-03-05
+39                   ARACAJU    SE -10.946830  ...  10.911625     TomTom  2023-03-05
+40             CRISTINÁPOLIS    SE -11.479440  ...   8.129192     TomTom  2023-03-05
+41                    CARIRA    SE -10.365840  ...  14.062144     TomTom  2023-03-05
+42              MOITA BONITA    SE -10.616180  ...   0.740000     MapBox  2023-03-05
+43              RIBEIRÓPOLIS    SE -10.540153  ...   0.801728     MapBox  2023-03-05
+44                 ARAPIRACA    AL  -9.759854  ...   0.787619     MapBox  2023-03-05
+45                   LAGARTO    SE -10.915300  ...   0.570000       Here  2023-03-05
+46             SÃO CRISTÓVÃO    SE -11.014700  ...   0.760000       Here  2023-03-05
+47                   LAGARTO    SE -10.927850  ...   0.810000       Here  2023-03-05
+
+[48 rows x 7 columns]
+[2025-12-19T17:35:02.599+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-19T17:35:02.638+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=etl_pipeline_real, task_id=transformacoes, run_id=manual__2025-12-19T17:34:58.345051+00:00, execution_date=20251219T173458, start_date=20251219T173501, end_date=20251219T173502
+[2025-12-19T17:35:02.675+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2025-12-19T17:35:02.717+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-12-19T17:35:02.721+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

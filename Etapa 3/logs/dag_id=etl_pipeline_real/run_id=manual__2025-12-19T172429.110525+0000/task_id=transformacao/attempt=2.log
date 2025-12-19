@@ -1,0 +1,39 @@
+[2025-12-19T17:28:23.147+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-19T17:28:23.186+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_pipeline_real.transformacao manual__2025-12-19T17:24:29.110525+00:00 [queued]>
+[2025-12-19T17:28:23.196+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_pipeline_real.transformacao manual__2025-12-19T17:24:29.110525+00:00 [queued]>
+[2025-12-19T17:28:23.197+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2025-12-19T17:28:23.213+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): transformacao> on 2025-12-19 17:24:29.110525+00:00
+[2025-12-19T17:28:23.223+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'etl_pipeline_real', 'transformacao', 'manual__2025-12-19T17:24:29.110525+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/etl_pipeline.py', '--cfg-path', '/tmp/tmpy2r4_kv5']
+[2025-12-19T17:28:23.226+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=810) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-12-19T17:28:23.227+0000] {standard_task_runner.py:91} INFO - Job 6: Subtask transformacao
+[2025-12-19T17:28:23.227+0000] {standard_task_runner.py:64} INFO - Started process 812 to run task
+[2025-12-19T17:28:23.308+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_pipeline_real.transformacao manual__2025-12-19T17:24:29.110525+00:00 [running]> on host ccad5058f773
+[2025-12-19T17:28:23.637+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_pipeline_real' AIRFLOW_CTX_TASK_ID='transformacao' AIRFLOW_CTX_EXECUTION_DATE='2025-12-19T17:24:29.110525+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-19T17:24:29.110525+00:00'
+[2025-12-19T17:28:23.638+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-19T17:28:23.667+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-19T17:28:23.668+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/etl_pipeline.py", line 34, in transformacao
+    df = df[~df['geoapi_id'].str.contains('openrouteservice', case=False, na=False)]
+             ~~^^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+[2025-12-19T17:28:23.689+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=etl_pipeline_real, task_id=transformacao, run_id=manual__2025-12-19T17:24:29.110525+00:00, execution_date=20251219T172429, start_date=20251219T172823, end_date=20251219T172823
+[2025-12-19T17:28:23.702+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 6 for task transformacao ('NoneType' object is not subscriptable; 812)
+[2025-12-19T17:28:23.724+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2025-12-19T17:28:23.754+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-19T17:28:23.762+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

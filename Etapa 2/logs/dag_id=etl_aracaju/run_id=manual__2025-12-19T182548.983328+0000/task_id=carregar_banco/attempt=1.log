@@ -1,0 +1,37 @@
+[2025-12-19T18:25:54.316+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-19T18:25:54.356+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_aracaju.carregar_banco manual__2025-12-19T18:25:48.983328+00:00 [queued]>
+[2025-12-19T18:25:54.365+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_aracaju.carregar_banco manual__2025-12-19T18:25:48.983328+00:00 [queued]>
+[2025-12-19T18:25:54.366+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-12-19T18:25:54.381+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): carregar_banco> on 2025-12-19 18:25:48.983328+00:00
+[2025-12-19T18:25:54.391+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'etl_aracaju', 'carregar_banco', 'manual__2025-12-19T18:25:48.983328+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/etl_aracaju.py', '--cfg-path', '/tmp/tmp9a2a9mkm']
+[2025-12-19T18:25:54.394+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=197) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-12-19T18:25:54.395+0000] {standard_task_runner.py:91} INFO - Job 4: Subtask carregar_banco
+[2025-12-19T18:25:54.395+0000] {standard_task_runner.py:64} INFO - Started process 199 to run task
+[2025-12-19T18:25:54.478+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_aracaju.carregar_banco manual__2025-12-19T18:25:48.983328+00:00 [running]> on host f7813899b391
+[2025-12-19T18:25:54.812+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_aracaju' AIRFLOW_CTX_TASK_ID='carregar_banco' AIRFLOW_CTX_EXECUTION_DATE='2025-12-19T18:25:48.983328+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-19T18:25:48.983328+00:00'
+[2025-12-19T18:25:54.813+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-19T18:25:54.880+0000] {crypto.py:82} WARNING - empty cryptography key - values will not be stored encrypted.
+[2025-12-19T18:25:54.881+0000] {base.py:84} INFO - Using connection ID '***_db' for task execution.
+[2025-12-19T18:25:54.892+0000] {sql.py:495} INFO - Running statement: DROP TABLE IF EXISTS enderecos_aracaju;, parameters: None
+[2025-12-19T18:25:54.895+0000] {base.py:84} INFO - Using connection ID '***_db' for task execution.
+[2025-12-19T18:25:54.906+0000] {sql.py:495} INFO - Running statement: 
+    CREATE TABLE enderecos_aracaju (
+        id SERIAL PRIMARY KEY,
+        city VARCHAR,
+        state VARCHAR,
+        latitude FLOAT,
+        longitude FLOAT,
+        accuracy FLOAT,
+        geoapi_id VARCHAR,
+        date DATE
+    );
+    , parameters: None
+[2025-12-19T18:25:54.922+0000] {base.py:84} INFO - Using connection ID '***_db' for task execution.
+[2025-12-19T18:25:54.956+0000] {logging_mixin.py:188} INFO - DEUBG| 12 registros de Aracaju inseridos no banco
+[2025-12-19T18:25:54.957+0000] {logging_mixin.py:188} INFO - DEUBG| SUCESSO
+[2025-12-19T18:25:54.958+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-12-19T18:25:54.959+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-19T18:25:54.975+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=etl_aracaju, task_id=carregar_banco, run_id=manual__2025-12-19T18:25:48.983328+00:00, execution_date=20251219T182548, start_date=20251219T182554, end_date=20251219T182554
+[2025-12-19T18:25:55.012+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2025-12-19T18:25:55.039+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-12-19T18:25:55.043+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

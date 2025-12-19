@@ -1,0 +1,32 @@
+[2025-12-19T17:33:23.611+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-12-19T17:33:23.649+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: etl_pipeline_real.extracao_dados manual__2025-12-19T17:24:29.110525+00:00 [queued]>
+[2025-12-19T17:33:23.660+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: etl_pipeline_real.extracao_dados manual__2025-12-19T17:24:29.110525+00:00 [queued]>
+[2025-12-19T17:33:23.661+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2025-12-19T17:33:23.937+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): extracao_dados> on 2025-12-19 17:24:29.110525+00:00
+[2025-12-19T17:33:23.947+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'etl_pipeline_real', 'extracao_dados', 'manual__2025-12-19T17:24:29.110525+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/etl_pipeline.py', '--cfg-path', '/tmp/tmpqh54x9px']
+[2025-12-19T17:33:23.950+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=867) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-12-19T17:33:23.950+0000] {standard_task_runner.py:91} INFO - Job 7: Subtask extracao_dados
+[2025-12-19T17:33:23.951+0000] {standard_task_runner.py:64} INFO - Started process 869 to run task
+[2025-12-19T17:33:24.029+0000] {task_command.py:426} INFO - Running <TaskInstance: etl_pipeline_real.extracao_dados manual__2025-12-19T17:24:29.110525+00:00 [running]> on host ccad5058f773
+[2025-12-19T17:33:24.451+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='etl_pipeline_real' AIRFLOW_CTX_TASK_ID='extracao_dados' AIRFLOW_CTX_EXECUTION_DATE='2025-12-19T17:24:29.110525+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-12-19T17:24:29.110525+00:00'
+[2025-12-19T17:33:24.453+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-12-19T17:33:24.540+0000] {logging_mixin.py:188} INFO - Total de registros lidos: 50000
+[2025-12-19T17:33:24.540+0000] {python.py:237} INFO - Done. Returned value was:        Unnamed: 0           city state  ...  accuracy         geoapi_id        date
+0               0      SÃO PAULO    SP  ...  0.734127            MapBox  2022-10-12
+1               1      SÃO PAULO    SP  ...  0.734127            MapBox  2022-10-11
+2               2      JOINVILLE    SC  ...  1.000000  OpenRouteService  2022-10-15
+3               3      JOINVILLE    SC  ...  1.000000  OpenRouteService  2022-10-14
+4               4      JOINVILLE    SC  ...  1.000000  OpenRouteService  2022-10-14
+...           ...            ...   ...  ...       ...               ...         ...
+49995       49995      JOINVILLE    SC  ...  1.000000              Here  2022-04-26
+49996       49996  FLORIANÓPOLIS    SC  ...  0.800000              Here  2022-04-26
+49997       49997   PORTO ALEGRE    RS  ...  0.900000              Here  2022-04-26
+49998       49998       CURITIBA    PR  ...  1.000000              Here  2022-04-26
+49999       49999  FLORIANÓPOLIS    SC  ...  1.000000              Here  2022-04-26
+
+[50000 rows x 8 columns]
+[2025-12-19T17:33:24.558+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-12-19T17:33:24.880+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=etl_pipeline_real, task_id=extracao_dados, run_id=manual__2025-12-19T17:24:29.110525+00:00, execution_date=20251219T172429, start_date=20251219T173323, end_date=20251219T173324
+[2025-12-19T17:33:24.930+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2025-12-19T17:33:24.960+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-12-19T17:33:24.964+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
